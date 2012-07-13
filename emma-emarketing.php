@@ -3,7 +3,7 @@
  * Plugin Name: Emma Emarketing Plugin
  * Plugin URI: http://ahsodeisgns.com/wordpress-plugins/emma-emarketing
  * Description: This Plugin has a Widget and a Shortcode that creates a subscription form for Emma,
- * Version: 1.0
+ * Version: 1.0.1
  * Author: Ah SO Designs
  * Author URI: http://ahsodesigns.com
  * Contributors: ahsodesigns
@@ -146,8 +146,7 @@ class Emma_Emarketing {
             'privateAPIkey' => '',
             'logged_in' => 'false',
             'groups' => array(),
-            'group_name' => '',
-            'group_ids' => '',
+            'group_active' => '',
         ), $this->account_information_settings );
 
         $this->form_setup_settings = array_merge( array(
@@ -259,16 +258,19 @@ class Emma_Emarketing {
         $groups = $this->account_information_settings['groups'];
 
         // groups dropdown
-        echo '<select id="emma_groups" name="' . $this->_account_information_settings_key . '[group_name]">';
-        echo '<option value=""> - select a group - </option>';
-        foreach ( $groups as $group ) {
-            echo '<option value="' . $group . '"';
-            if ( $this->account_information_settings['group_name'] == $group ) { echo "selected"; }
-            echo '>' . $group . '</option>';
+        echo '<select id="emma_groups" name="' . $this->_account_information_settings_key . '[group_active]">';
+        echo '<option value="000"> - select a group - </option>';
+
+        foreach ( $groups as $group_key => $group_value ) {
+            echo '<option value="' . $group_key . '"';
+            if ( $this->account_information_settings['group_active'] == $group_key ) { echo "selected"; }
+            echo '>' . $group_value . '</option>';
         }
+
         echo '</select>';
+
         // refresh button
-        echo '<input style="margin-left: 20px;" type="submit" name="emma_account_information[refresh]" id="refresh" class="button-secondary" value="Refresh" />';
+        echo '<input style="margin-left: 20px;" type="submit" name="emma_account_information[refresh]" id="refresh" class="button-secondary" value="Refresh Groups" />';
     }
 
     function sanitize_account_information_settings( $input ) {
@@ -332,58 +334,42 @@ class Emma_Emarketing {
             }
 
             // get group data
-            // check if not logged in, or just refreshing groups
-            if ( ( $input['logged_in'] == 'false') || $refresh ) {
 
-                // instantiate a new Emma API class, pass login / auth data to it
-                $emma_api = new Emma_API( $valid_input['account_id'], $valid_input['publicAPIkey'], $valid_input['privateAPIkey']);
+            // instantiate a new Emma API class, pass login / auth data to it
+            $emma_api = new Emma_API( $valid_input['account_id'], $valid_input['publicAPIkey'], $valid_input['privateAPIkey']);
 
-                // get the groups for this account
-                $groups = $emma_api->list_groups();
+            // get the groups for this account
+            $groups = $emma_api->list_groups();
 
-                // check if groups returned an error, or an answer
-                if ( is_array($groups) ) {
+            // check if groups returned an error, or an answer
+            if ( is_array($groups) ) {
 
-                    // if it returns an array, it's got groups from hooking up w/ emma
-                    $valid_input['logged_in'] = 'true';
+                // if it returns an array, it's got groups back from hooking up w/ emma
+                $valid_input['logged_in'] = 'true';
 
-                    // pass the array of group names into the settings
-                    $valid_input['groups'] = $groups;
+                // pass the array of groups into the settings
+                $valid_input['groups'] = $groups;
 
-                    // pass the group name in as the active group
-                    $valid_input['group_name'] = $input['group_name'];
+                // if there is an active group selected, pass it through
+                $valid_input['group_active'] = $input['group_active'];
 
-                    // assign the group id of the active group name
-                    // if there is a group name, assign the group id based on the group name
-                    $valid_input['group_ids'] = array_search( $input['group_name'], $this->account_information_settings['groups'] );
+            } else {
 
-                } else {
+                // not logged in...
+                $valid_input['logged_in'] = 'false';
 
-                    // not logged in...
-                    $valid_input['logged_in'] = 'false';
-
-                    // pass thru previous info
-                    $valid_input['group_name'] = $input['group_name'];
-
-                    // the method returns a string / error message otherwise
-                    add_settings_error(
-                        'account_id',
-                        'emma_error',
-                        $groups,
-                        'error'
-                    );
-
-                }
-
-            } // endif logged_in == false
-
-            if ( $input['logged_in'] == 'true' ) {
-
-                // pass thru groups and group information
+                // pass thru previous info
                 $valid_input['groups'] = $this->account_information_settings['groups'];
-                $valid_input['group_ids'] = array_search( $input['group_name'], $this->account_information_settings['groups'] );
-                $valid_input['group_name'] = $input['group_name'];
-                $valid_input['logged_in'] = $input['logged_in'];
+                $valid_input['group_active'] = $valid_input['group_active'];
+
+                // the method returns a string / error message otherwise
+                add_settings_error(
+                    'account_id',
+                    'emma_error',
+                    $groups,
+                    'error'
+                );
+
 
             }
 
@@ -396,7 +382,7 @@ class Emma_Emarketing {
                 'publicAPIkey' => '',
                 'logged_in' => 'false',
                 'groups' => array(),
-                'group_name' => '',
+                'group_active' => '',
                 'group_ids' => '',
             );
 
@@ -406,7 +392,7 @@ class Emma_Emarketing {
             $valid_input['publicAPIkey'] = $default_options['publicAPIkey'];
             $valid_input['logged_in'] = $default_options['logged_in'];
             $valid_input['groups'] = $default_options['groups'];
-            $valid_input['group_name'] = $default_options['group_name'];
+            $valid_input['group_active'] = $default_options['group_active'];
             $valid_input['group_ids'] = $default_options['group_ids'];
 
         }

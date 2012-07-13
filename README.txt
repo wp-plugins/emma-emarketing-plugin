@@ -6,7 +6,7 @@ Author URI: http://ahsodesigns.com
 Plugin URI: http://ahsodesigns.com/products/emma-emarketing/plugin
 Requires at least: 3.1
 Tested up to: 3.1
-Stable tag: 1.0
+Stable tag: 1.0.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 

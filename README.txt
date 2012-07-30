@@ -5,8 +5,8 @@ Tags: Plugin, Emma, MyEmma, emarketing, form, custom, api, widget, shortcode, su
 Author URI: http://ahsodesigns.com
 Plugin URI: http://ahsodesigns.com/products/emma-emarketing/plugin
 Requires at least: 3.1
-Tested up to: 3.1
-Stable tag: 1.0.1
+Tested up to: 3.4
+Stable tag: 1.0.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -99,10 +99,14 @@ To insert the form as a <strong>shortcode</strong> within your site, insert &#91
 
 == Upgrade Notice ==
 
-1. This Plugin is a platypus of OOP & sequential php.
+1. This Plugin now uses basic OOP.
 2. This Plugin requires Wordpress version 3.1 and above
-3. This Plugin requires PHP version 5.2.6, as it uses json_encode with integers in the Emma_API class
+3. This Plugin requires PHP version 5.2.6 and above 
 
 == Changelog ==
 
-This is version 1.0, it's stable. It needs some cleaning, but it flies, and flies well.
+- v 1.0.2 - cleaned up OOP structure, switched to WP naming conventions, fixed bug where users weren't being assigned to groups,
+
+- v 1.0.1 - typed active group_id as integer for uptake to Emma. Emma required group_ids submitted as an array of integers. in older versions of PHP json_encode types integers as strings.
+
+- v 1.0 - it's stable. It needs some cleaning, but it flies, and flies well.

@@ -6,7 +6,7 @@ Author URI: http://ahsodesigns.com
 Plugin URI: http://ahsodesigns.com/products/emma-emarketing/plugin
 Requires at least: 3.1
 Tested up to: 3.4.1
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -106,7 +106,9 @@ To insert the form as a <strong>shortcode</strong> within your site, insert &#91
 
 == Changelog ==
 
-- v 1.0.2 - cleaned up OOP structure, switched to WP naming conventions, fixed bug where users weren't being assigned to groups,
+- v 1.0.3 - fixed accidental php short tag, ( tyty @avioli ), updated readme.txt, spelling errors, and nomenclature updates.
+
+- v 1.0.2 - cleaned up OOP structure. switched to WP naming conventions, fixed bug where users weren't being assigned to groups,
 
 - v 1.0.1 - typed active group_id as integer for uptake to Emma. Emma required group_ids submitted as an array of integers. in older versions of PHP json_encode types integers as strings.
 

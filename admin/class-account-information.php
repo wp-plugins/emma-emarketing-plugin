@@ -48,7 +48,7 @@ class Account_Information {
 
         add_settings_field( 'public_api_key', 'Public API Key', array( &$this, 'field_public_api_key' ), self::$key, 'section_login' );
         add_settings_field( 'private_api_key', 'Private API Key', array( &$this, 'field_private_api_key' ), self::$key, 'section_login' );
-        add_settings_field( 'account_id', 'Account Number', array( &$this, 'field_account_id' ), self::$key, 'section_login' );
+        add_settings_field( 'account_id', 'Account ID', array( &$this, 'field_account_id' ), self::$key, 'section_login' );
 
         add_settings_section( 'section_groups', 'Add New Members to Group', array( &$this, 'section_groups_desc' ), self::$key );
 

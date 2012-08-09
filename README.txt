@@ -79,7 +79,7 @@ To insert the form as a <strong>shortcode</strong> within your site, insert &#91
 
 == Screenshots ==
 
-1. This is the Accoutn Information tab of the plugin settings, here you enter your account keys and account number, then select the group you wish to add members to.
+1. This is the Account Information tab of the plugin settings, here you enter your account keys and account number, then select the group you wish to add members to.
 2. This is the Form Setup tab of the plugin settings, here you configure the form's output on your site, you can also choose to add a stylish emma logo to your form, and share some love. 
 3. This is the Form Customization tab of the plugin settings, here you can style your form, choose colors, border types, and so on.
 4. This is the Help tab of the plugin settings, it contains instructions on how to get up and running with your new Emma Emarketing WordPress Plugin.

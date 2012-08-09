@@ -3,7 +3,7 @@ Contributors: ahsodesigns
 Donate Link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=Q7FRK4XEF8EAS
 Tags: Plugin, Emma, MyEmma, emarketing, form, custom, api, widget, shortcode, subscription
 Author URI: http://ahsodesigns.com
-Plugin URI: http://ahsodesigns.com/products/emma-emarketing/plugin
+Plugin URI: http://www.ahsodesigns.com/products/emma-emarketing-plugin/
 Requires at least: 3.1
 Tested up to: 3.4.1
 Stable tag: 1.0.3

@@ -141,7 +141,7 @@ class Form_Setup {
            name="<?php echo self::$key; ?>[lastname_placeholder]"
            value="<?php echo esc_attr( self::$settings['lastname_placeholder'] ); ?>"
         />
-    <? }
+    <?php }
 
     function field_submit_txt() { ?>
         <input id="emma_submit_txt"

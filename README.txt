@@ -79,9 +79,10 @@ To insert the form as a <strong>shortcode</strong> within your site, insert &#91
 
 == Screenshots ==
 
-1. This is the simple subscription form the plugin outputs on your site `/screenshots/screenshot-1.png`
-2. This is the Widget Panel, showing the Plugin Widget, as well as placement of the widget in the sidebar `/screenshots/screenshot-2.png`
-3. This is the Plugin Settings page, there are three tabs to configure the plugin, Account Information, Form Setup and Form Customization. `/screenshots/screenshot-3.png`
+1. This is the Accoutn Information tab of the plugin settings, here you enter your account keys and account number, then select the group you wish to add members to.
+2. This is the Form Setup tab of the plugin settings, here you configure the form's output on your site, you can also choose to add a stylish emma logo to your form, and share some love. 
+3. This is the Form Customization tab of the plugin settings, here you can style your form, choose colors, border types, and so on.
+4. This is the Help tab of the plugin settings, it contains instructions on how to get up and running with your new Emma Emarketing WordPress Plugin.
 
 == Frequently Asked Questions ==
 

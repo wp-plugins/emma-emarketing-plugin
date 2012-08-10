@@ -18,7 +18,7 @@ After the plugin is installed, the setup page will guide you through entering yo
 
 To see the plugin at work, visit: http://ahsodesigns.com/products/emma-emarketing-plugin/
 
-There may also be an instructional video on the site guiding you through the process.
+There is also an instructional video on YouTube to guide you through the process: http://www.youtube.com/watch?v=e2vjCk5E4Tg
 
 
 == Installation ==

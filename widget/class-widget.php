@@ -4,7 +4,7 @@
  *
  * long desc
  * @package Emma_Emarketing
- * @author ah so designs
+ * @author ah so
  * @version 1.0
  * @abstract
  * @copyright not yet

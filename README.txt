@@ -3,10 +3,10 @@ Contributors: ahsodesigns
 Donate Link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=Q7FRK4XEF8EAS
 Tags: Plugin, Emma, MyEmma, emarketing, form, custom, api, widget, shortcode, subscription
 Author URI: http://ahsodesigns.com
-Plugin URI: http://ahsodesigns.com/products/emma-emarketing/plugin
+Plugin URI: http://www.ahsodesigns.com/products/emma-emarketing-plugin/
 Requires at least: 3.1
 Tested up to: 3.4.1
-Stable tag: 1.0.2
+Stable tag: 1.0.4
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +18,7 @@ After the plugin is installed, the setup page will guide you through entering yo
 
 To see the plugin at work, visit: http://ahsodesigns.com/products/emma-emarketing-plugin/
 
-There may also be an instructional video on the site guiding you through the process.
+There is also an instructional video on YouTube to guide you through the process: http://www.youtube.com/watch?v=e2vjCk5E4Tg
 
 
 == Installation ==
@@ -106,7 +106,9 @@ To insert the form as a <strong>shortcode</strong> within your site, insert &#91
 
 == Changelog ==
 
-- v 1.0.2 - cleaned up OOP structure, switched to WP naming conventions, fixed bug where users weren't being assigned to groups,
+- v 1.0.3 - fixed accidental php short tag, ( tyty @avioli ), updated readme.txt, spelling errors, and nomenclature updates.
+
+- v 1.0.2 - cleaned up OOP structure. switched to WP naming conventions, fixed bug where users weren't being assigned to groups,
 
 - v 1.0.1 - typed active group_id as integer for uptake to Emma. Emma required group_ids submitted as an array of integers. in older versions of PHP json_encode types integers as strings.
 

@@ -4,8 +4,8 @@
  * Plugin Name: Emma Emarketing Plugin
  * Plugin URI: http://ahsodeisgns.com/wordpress-plugins/emma-emarketing
  * Description: This Plugin has a Widget and a Shortcode that creates a subscription form for Emma,
- * Version: 1.0.2
- * Author: Ah SO Designs
+ * Version: 1.0.4
+ * Author: Ah So
  * Author URI: http://ahsodesigns.com
  * Contributors: ahsodesigns
  * License: GPLv2

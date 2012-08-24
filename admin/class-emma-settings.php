@@ -5,7 +5,7 @@ include_once('class-form-setup.php');
 include_once('class-form-custom.php');
 include_once('class-help.php');
 
-class Settings {
+class Emma_Settings {
 
     private static $_plugin_options_key = 'emma_plugin_options';
     private $_plugin_settings_tabs = array();
@@ -34,10 +34,10 @@ class Settings {
         $this->_plugin_settings_tabs[ Form_Custom::$key ]           = 'Form Customization';
         $this->_plugin_settings_tabs[ Help::$key ]                  = 'Help';
 
-        new Account_Information();
-        new Form_Setup();
-        new Form_Custom();
-        new Help();
+        $account_information = new Account_Information();
+        $form_setup = new Form_Setup();
+        $form_custom = new Form_Custom();
+        $help = new Help();
 
     }
 

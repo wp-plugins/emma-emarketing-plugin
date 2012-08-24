@@ -25,6 +25,8 @@ class Help {
 
         <a href="http://myemma.com/login/" target="_blank">Login to the Emma Dashboard</a>
 
+        Here's an instructional video on youtube that will have you up and running in no time: <a href="http://www.youtube.com/watch?v=e2vjCk5E4Tg">How to use your Emma Emarketing Plugin</a>
+
         <h3>ACCOUNT INFORMATION TAB</h3>
 
         <strong>Account Login Information:</strong>

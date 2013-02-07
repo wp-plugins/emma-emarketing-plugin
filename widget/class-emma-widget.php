@@ -4,16 +4,18 @@
  *
  * long desc
  * @package Emma_Emarketing
- * @author ah so designs
+ * @author ah so
  * @version 1.0
  * @abstract
  * @copyright not yet
  */
 
+
+include_once( EMMA_EMARKETING_PATH . '/class-emma-style.php');
+
 class Emma_Widget extends WP_Widget {
 
     private $_form_setup_settings_key = 'emma_form_setup';
-    private $_form_custom_settings_key = 'emma_form_custom';
 
 	// process the widget (the constructor)
 	function __construct() {
@@ -34,25 +36,22 @@ class Emma_Widget extends WP_Widget {
 			
             // register / enqueue styles / scripts
             // wp_enqueue_style( $handle, $src, $deps, $ver, $media );
-            // wp_enqueue_style( 'emma-form-style', plugins_url( 'emma-style.php', __FILE__ ), array(), '1.0', 'screen' );
+            // wp_enqueue_style( 'emma-form-style', plugins_url( 'class-style.php', __FILE__ ), array(), '1.0', 'screen' );
 
             // for now, output the dynamic style sheet in the <head> directly
             // dangit. i RLY wanna use wp_enque, but get_option isn't avail.
-            // should've trusted my gut and made the value object to house the settigns. fewer db queries too.
-            add_action( 'wp_head', array( &$this, 'do_dynamic_styles' ) );
+            #todo - make css file dynamic on settings save, file_put_contents() that way it can be enqueed.
+            $emma_style = new Emma_Style();
+            add_action( 'wp_head', array( $emma_style, 'output' ), 10 );
 
             // wp_register_script( $handle, $src, $deps, $ver, $in_footer );
-			// wp_register_script( 'jquery-emma', plugins_url( '/js/jquery.emma.js', dirname(__FILE__) ), array( 'jquery' ), 1.0, TRUE );
+			// wp_register_script( 'jquery-emma', EMMA_EMARKETING_PATH . '/js/jquery.emma.js', array( 'jquery' ), 1.0, TRUE );
 			// wp_enqueue_script( 'jquery-emma' );
 
         } // end if
         
 	} // end __construct
 
-    function do_dynamic_styles() {
-        include_once( 'emma-style.php' );
-    }
-	
 	// displays the widget form in the admin dashboard, Appearance -> Widgets
 	function form($instance) {
 	
@@ -95,10 +94,10 @@ class Emma_Widget extends WP_Widget {
 			echo $before_title . apply_filters('widget_title', $title) . $after_title;
 
         // instantiate form class, pass in plugin settings
-		$emma_form = new Emma_Form( $this->form_setup_settings );
+		$emma_form = new Emma_Form();
 
         // hey crazy, if a function returns something, you'll need to echo it out.
-        echo $emma_form->do_form();
+        echo $emma_form->generate_form();
 
 		// end of widget output
 		echo $after_widget;
@@ -113,4 +112,4 @@ add_action( 'widgets_init', 'emma_register_widgets' );
 function emma_register_widgets() {
 	register_widget( 'emma_widget' );
 }
-?>
+

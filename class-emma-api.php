@@ -78,16 +78,18 @@ class Emma_API {
 		
 		// make the call, tyty WP HTTP API
 		$response = wp_remote_request( $request_url, $request_args );
-				
+
+        #todo - @ this point, the emma api class should just return the object, let the class calling it handle the return. ( is_wp_error vs emma response object )
+
 		// check to see if it throws a wordpress error
 		if( is_wp_error( $response ) ) {
 
 			$status_txt =  '<div class="e2ma-error">Something misfired. Please check your API keys and try again,</div>';
 			// get the wordpress error
 			$status_txt .= '<pre>' . $response->get_error_message() . '</pre>';
-			
+
 			$response = $status_txt;
-						
+
 		} else {
 		
 			// decode the JSON from the response body
@@ -146,47 +148,7 @@ class Emma_API {
 
 		// make the call, tyty WP HTTP API
 		$response = wp_remote_request( $request_url, $request_args );
-		
-		if( is_wp_error( $response ) ) {
 
-			$status_txt =  'Something went wrong! Please try to submit the form again,';
-			// get the wordpress error
-			$status_txt .= '<pre>' . $response->get_error_message() . '</pre>';
-			
-			$response = $status_txt;
-						
-		} else {
-
-			// decode the JSON from the request body
-			$response = json_decode( $response['body'] );
-
-			// check if the member was added
-			if ( $response->added == true ) {
-			
-				// get their member id from the response object
-				$member_id = $response->member_id;
-				
-				// call get_member_detail to verify the member was added
-				$verify_member = $this->get_member_detail( $member_id );
-
-                // if they're unverified
-				if ( $verify_member == false ) {
-				
-					$status_txt = 'This member has already been added.';
-
-				} else {
-                    $status_txt = 'success';
-                }
-
-                $response = $status_txt;
-			
-			} else {
-
-                $response = 'Member not added';
-            }
-
-		} // end if / else
-		
 		return $response;
 	
 	} // end import_single_member()
@@ -221,25 +183,8 @@ class Emma_API {
 		// make the call again,
 		$response = wp_remote_request( $request_url, $request_args );
 		
-		if( is_wp_error( $response ) ) {
-
-			$status_txt =  'Something went wrong! Please try to submit the form again,';
-			// get the wordpress error
-			$status_txt .= '<pre>' . $response->get_error_message() . '</pre>';
-			
-			$response = $status_txt;
-
-		} else {
-			
-			// pull the json out of the body and decode it for php
-			$response = json_decode( $response['body'] );
-	
-		}
-
 		return $response;
 	
 	} // end get_member_detail() 
 
 } // end class Emma_API
-
-?>

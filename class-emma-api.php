@@ -81,7 +81,9 @@ class Emma_API {
 		
 		// make the call, tyty WP HTTP API
 		$response = $emma_response = wp_remote_request( $request_url, $request_args );
-		$decoded_response = json_decode($response['body']);
+		if (is_array($response)) {
+			$decoded_response = json_decode($response['body']);
+		}
 
         #todo - @ this point, the emma api class should just return the object, let the class calling it handle the return. ( is_wp_error vs emma response object )
 

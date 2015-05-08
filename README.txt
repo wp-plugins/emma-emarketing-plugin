@@ -4,16 +4,18 @@ Tags: Plugin, Emma, MyEmma, emarketing, form, custom, api, widget, shortcode, su
 Author URI: http://ahsodesigns.com
 Plugin URI: http://www.ahsodesigns.com/products/emma-emarketing-plugin/
 Requires at least: 3.0
-Tested up to: 4.1.1
-Stable tag: 1.1
+Tested up to: 4.2.2
+Stable tag: 1.1.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
-The Emma for Wordpress plugin allows you to quickly and easily add a signup form for your Emma list as a widget or a shortcode on your WordPress 3.0 or higher site.
+The Emma for Wordpress plugin allows you to quickly and easily add a signup form for your Emma list as a widget on your WordPress 3.0 or higher site.
 
 After the plugin is installed, the setup page will guide you through entering your Emma API login information, selecting your group, setting up the fields for your form, customizing the form, and then adding the Widget to your site. The great news is that this whole process will take less than five minutes and everything can be done via the WordPress Dashboard Setting GUI – no file editing at all!
+
+[Sign up today!](http://myemma.com/partners/get-started?utm_source=Wordpress&utm_medium=integrationpartner&utm_campaign=Wordpress-integrationpartner-partner-trial)
 
 
 == Installation ==
@@ -26,25 +28,25 @@ After the plugin is installed, the setup page will guide you through entering yo
 
 &nbsp;
 
-== Usage Documentation ==
+= Usage Documentation =
 
 **ACCOUNT INFORMATION TAB**
 
 **Account Login Information:**
 
-Log into your [Emma account](http://myemma.com/login/ "Email Marketing Services - Email Marketing Software - Email Marketing | Emma, Inc.") and click on 'Account & billing' in the upper right hand of your Emma dashboard. This will take you to your “Manage your account settings” page. In the Account settings section, the fourth tab is API key. Click on Generate new key to create your API key.
+Log into your [Emma account](http://myemma.com/login/) ([http://myemma.com/login/](http://myemma.com/login/)) and click on 'Account & billing' in the upper right hand of your Emma dashboard. This will take you to your “Manage your account settings” page. In the Account settings section, the fourth tab is **API key**. Click on Generate new key to create your API key.
 
 Once you create the key, you will need to copy your **Account ID**, **Public API Key**, and **Private API** into the corresponding fields in the plugin.
 
-The plugin will now be able to connect your WordPress site to your Emma account.
+The plugin will now be able to connect your WordPress site to your Emma account. 
 
-**Add New Members to Group (optional) –** assign all submissions to a specific group within your Emma account.
+**Add New Members to Group (optional) -** assign all submissions to a specific group within your Emma account.
 
 &nbsp;
 
 **FORM SETUP TAB**
 
-**Signup ID -** Add this ID to target messages based on the signup form members used to join your audience. Click [here](https://www.google.com/url?q=https%3A%2F%2Fsupport.e2ma.net%2FResource_Center%2FAccount_how-to%2Fcustomizing-your-signup-form%23publish&sa=D&sntz=1&usg=AFQjCNF5iYZYQ9csCvvCibwt6L_zyQr0Ig) for more information.
+**Signup ID -** Add this ID to target messages based on the signup form members used to join your audience. Click [here](https://support.e2ma.net/Resource_Center/Account_how-to/customizing-your-signup-form#publish) for more information.
 
 **Form Fields -** select which fields you would like to display.
 
@@ -76,6 +78,10 @@ To insert the form as a **widget** on your sidebar, go to Appearance -> Widgets 
 
 To insert the form as a **shortcode** within your site, insert [emma_form] within your text editor where you want the form to appear.
 
+&nbsp;
+
+For questions or comments visit our [plugin homepage](http://ahsodesigns.com/nashville-wordpress-what-we-do/plugin-development/emma-wordpress-plugin/).
+
 == Screenshots ==
 
 1. This is the Account Information tab of the plugin settings, here you enter your account keys and account number, then select the group you wish to add members to.
@@ -83,19 +89,21 @@ To insert the form as a **shortcode** within your site, insert [emma_form] withi
 3. This is the Form Customization tab of the plugin settings, here you can style your form, choose colors, border types, and so on.
 4. This is the Help tab of the plugin settings, it contains instructions on how to get up and running with your new Emma for WordPress Plugin.
 
-== FAQ ==
+== Frequently Asked Questions ==
 
 1. How do I put the form on my website?
-   - Once you have activated the plugin, setup your Emma account to work with their new API, and configured your Emma for Wordpress Settings, you have two options for adding the form to your site. 
+   
+   Once you have activated the plugin, setup your Emma account to work with their new API, and configured your Emma for Wordpress Settings, you have two options for adding the form to your site. 
 
-   -**Widget**
+   **Widget**
    If you would like to add the form to a widget area, navigate to Appearance->Widgets. This plugin comes with a widget called 'Emma for Wordpress Subscription Form'. The Widgets are listed in alphabetical order. 
 
-   -**Shortcode**
+   **Shortcode**
    If you would like to add the form to another area on your site, you can use the Emma shortcode. Simply type [emma_form] in the HTML view in the post editor. For more information on shortcodes, check the almighty codex: [Shortcodes](http://codex.wordpress.org/Shortcode" WordPress Codex - Shortcodes").
 
 2. How do I add members to a specific group?
-   - Once you've configured the plugin, and entered your account ID, Private and Public API keys, navigate from the Dashboard to Settings -> Emma for Wordpress. Under the “Account information” tab there is a dropdown menu under “Add New Members to Group.” From here, you can select the group to which new members should be added.
+   
+   Once you've configured the plugin, and entered your account ID, Private and Public API keys, navigate from the Dashboard to Settings -> Emma for Wordpress. Under the “Account information” tab there is a dropdown menu under “Add New Members to Group.” From here, you can select the group to which new members should be added.
 
 == Upgrade Notice ==
 
@@ -104,16 +112,33 @@ To insert the form as a **shortcode** within your site, insert [emma_form] withi
 
 == Changelog ==
 
-- v 1.1 - Updated plugin to work with Emma's newest API. Lots of minor tweaks/updates.
+= 1.1.2 =
+* Fixed bug that was causing automation to fail in some instances.
+* Updates to documentation.
 
-- v 1.0.5 - added confirmation email message, nomenclature updates, Emma_API class fixes, relegated error handling to object making the call, Emma_API fits the adapter pattern better now. more bugfixes.
+= 1.1.1 =
+* Updated screenshots and readme.txt
 
-- v 1.0.4 - bugfixes, updated readme.txt
+= 1.1 =
+* Updated plugin to work with Emma's newest API. Lots of minor tweaks/updates.
+* Now works with email automation!
+* Better integration with the API.  Cleaner, more robust code with responsive default options.  
+* Bug fix: All members data is now added to Emma list.  Member signup and add member parameters were revised.
 
-- v 1.0.3 - fixed accidental php short tag, ( tyty @avioli ), updated readme.txt, spelling errors, and nomenclature updates.
+= 1.0.5 =
+* added confirmation email message, nomenclature updates, Emma_API class fixes, relegated error handling to object making the call, Emma_API fits the adapter pattern better now. more bugfixes.
 
-- v 1.0.2 - cleaned up OOP structure. switched to WP naming conventions, fixed bug where users weren't being assigned to groups,
+= 1.0.4 =
+* bugfixes, updated readme.txt
 
-- v 1.0.1 - typed active group_id as integer for uptake to Emma. Emma required group_ids submitted as an array of integers. in older versions of PHP json_encode types integers as strings.
+= 1.0.3 =
+* fixed accidental php short tag, ( tyty @avioli ), updated readme.txt, spelling errors, and nomenclature updates.
 
-- v 1.0 - it's stable. It needs some cleaning, but it flies, and flies well.
+= 1.0.2 =
+* cleaned up OOP structure. switched to WP naming conventions, fixed bug where users weren't being assigned to groups,
+
+= 1.0.1 =
+* typed active group_id as integer for uptake to Emma. Emma required group_ids submitted as an array of integers. in older versions of PHP json_encode types integers as strings.
+
+= 1.0 =
+* it's stable. It needs some cleaning, but it flies, and flies well.

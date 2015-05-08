@@ -3,8 +3,8 @@
 /**
  * Plugin Name: Emma For WordPress
  * Plugin URI: http://ahsodeisgns.com/wordpress-plugins/emma-emarketing
- * Description: The Emma Emarketing plugin allows you to quickly and easily add a signup form for your Emma list as a widget or a shortcode.
- * Version: 1.1
+ * Description: The Emma WordPress plugin allows you to quickly and easily add a signup form for your Emma list as a widget or a shortcode.
+ * Version: 1.1.2
  * Author: Ah So
  * Author URI: http://ahsodesigns.com
  * Contributors: ahsodesigns, brettshumaker
@@ -140,6 +140,8 @@ function emma_ajax_form_submit_callback() {
 	$response_array = array(
 		'status_txt' => $status_text,
 		'code' => $response,
+		'raw_data' => $emma_form->raw_data,
+		'raw_response' => $emma_form->raw_response,
 	);
 	echo json_encode($response_array);
 	

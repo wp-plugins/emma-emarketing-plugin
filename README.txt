@@ -4,8 +4,8 @@ Tags: Plugin, Emma, MyEmma, emarketing, form, custom, api, widget, shortcode, su
 Author URI: http://ahsodesigns.com
 Plugin URI: http://www.ahsodesigns.com/products/emma-emarketing-plugin/
 Requires at least: 3.0
-Tested up to: 4.1.1
-Stable tag: 1.1.1
+Tested up to: 4.2.2
+Stable tag: 1.1.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,6 +14,8 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 The Emma for Wordpress plugin allows you to quickly and easily add a signup form for your Emma list as a widget on your WordPress 3.0 or higher site.
 
 After the plugin is installed, the setup page will guide you through entering your Emma API login information, selecting your group, setting up the fields for your form, customizing the form, and then adding the Widget to your site. The great news is that this whole process will take less than five minutes and everything can be done via the WordPress Dashboard Setting GUI – no file editing at all!
+
+[Sign up today!](http://myemma.com/partners/get-started?utm_source=Wordpress&utm_medium=integrationpartner&utm_campaign=Wordpress-integrationpartner-partner-trial)
 
 
 == Installation ==
@@ -109,6 +111,10 @@ For questions or comments visit our [plugin homepage](http://ahsodesigns.com/nas
 3. This Plugin requires PHP version 5.2.6, as it uses json_encode with integers in the Emma_API class
 
 == Changelog ==
+
+= 1.1.2 =
+* Fixed bug that was causing automation to fail in some instances.
+* Updates to documentation.
 
 = 1.1.1 =
 * Updated screenshots and readme.txt

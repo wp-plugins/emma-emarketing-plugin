@@ -37,7 +37,7 @@ class Emma_Form {
         $this->output_the_form = true;
 		
         // instantiate new emma api class, pass in auth data
-        $this->emma_api = new Emma_API( $this->account_information_settings['account_id'], $this->account_information_settings['publicAPIkey'], $this->account_information_settings['privateAPIkey'], $signup_form_id );
+        $this->emma_api = new Emma_API( $this->account_information_settings['account_id'], $this->account_information_settings['publicAPIkey'], $this->account_information_settings['privateAPIkey'], $this->account_information_settings['form_signup_id'] );
 
     }
 
@@ -108,6 +108,9 @@ class Emma_Form {
                     $this->status_txt = $this->form_setup_settings['member_failed_status_txt'];
                     $this->emma_response = '830';
                 }
+                
+                $this->raw_data = $data;
+                $this->raw_response = $response;
 
             }
 
@@ -160,7 +163,7 @@ function emma_ajax_form_submit_callback() {
 
     // handles requests returned from the Emma_API class, has to deal w/ WP_Error as well as return objects
     public function emma_request_response_handler( $response ) {
-
+	    
         // if the API call returns an array
         if ( is_array($response) ) {
 
@@ -328,7 +331,7 @@ function emma_ajax_form_submit_callback() {
         $emma_form .= '<li class="emma-form-row emma-form-row-last">';
         $emma_form .= '<span class="emma-form-label-required"></span>';
         
-        $emma_form .= '<input type="hidden" name="emma_signup_form_id" value="' . $signup_form_id . '" />';
+        $emma_form .= '<input type="hidden" name="emma_signup_form_id" value="' . $this->account_information_settings['form_signup_id'] . '" />';
         $emma_form .= '<input type="hidden" name="emma_form_unique" value="' . $form_unique . '" />';
         
         $emma_form .= '<input id="emma-form-submit" type="submit" name="emma_form_submit" value="' . $this->form_setup_settings['submit_txt'] . '">';
@@ -336,6 +339,8 @@ function emma_ajax_form_submit_callback() {
         $emma_form .= '</li>';
         $emma_form .= '</ul>';
         $emma_form .= '</form>';
+        
+        //$emma_form .= '<pre>'.print_r($this->account_information_settings, true).'</pre>';
 
         // output status message
         if ( isset($_POST['emma_form_submit']) ) {

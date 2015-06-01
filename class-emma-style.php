@@ -104,7 +104,7 @@ class Emma_Style {
             #emma-form.x-small ul#emma-form-elements .emma-form-label { float: left; width: 97%; }
             
             .spinner{
-	            background: url(wp-includes/images/spinner.gif) #fff center no-repeat;
+	            		background: url(<?php echo get_bloginfo('wpurl'); ?>/wp-includes/images/spinner.gif) #fff center no-repeat;
 				-webkit-background-size: 20px 20px;
 				display: none;
 				opacity: 1.7;

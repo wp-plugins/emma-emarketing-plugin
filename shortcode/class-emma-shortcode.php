@@ -9,7 +9,7 @@ function emma_form_shortcode($atts) {
 	$account_settings_options = get_option('emma_account_information');
 	
 	$atts = shortcode_atts( array(
-		'signup_form_id' => $account_settings_options['group_active'],
+		'signup_form_id' => $account_settings_options['form_signup_id'],
 		'signup_form_layout' => ''
 	), $atts, 'emma_form' );
 	

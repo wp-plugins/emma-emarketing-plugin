@@ -84,7 +84,7 @@ class Emma_Form {
                 //echo '<pre>' . print_r($handled_response, true) . '</pre>';
 
                 // check to see if the member was added,
-                if ( $handled_response->status == 'member_added' ) {
+                if ( isset($handled_response->status) && $handled_response->status == 'member_added' ) {
                     // verify the member was added
                     $verified_member = $this->emma_verify_member( $handled_response );
 
@@ -102,11 +102,12 @@ class Emma_Form {
                         $this->emma_response = '820';
                     }
 
-                }
-                
-                if ( $handled_response->status == 'member_failed' ) {
+                } elseif ( isset($handled_response->status) && $handled_response->status == 'member_failed' ) {
                     $this->status_txt = $this->form_setup_settings['member_failed_status_txt'];
                     $this->emma_response = '830';
+                } else {
+	                $this->status_txt = $this->form_setup_settings['member_failed_status_txt'];
+	                $this->emma_response = '840';
                 }
                 
                 $this->raw_data = $data;
@@ -139,6 +140,7 @@ function emma_ajax_form_submit_callback() {
         if ( isset($_POST['emma_firstname']) ) $form_data['fields']['first_name'] = $form_data['fields']['name_first'] = $_POST['emma_firstname'];
         if ( isset($_POST['emma_lastname']) ) $form_data['fields']['last_name'] = $form_data['fields']['name_last'] = $_POST['emma_lastname'];
         if ( isset($_POST['emma_signup_form_id']) ) $form_data['signup_form_id'] = $_POST['emma_signup_form_id'];
+        if ( isset($_POST['emma_send_confirmation']) && $_POST['emma_send_confirmation'] !== '1' ) $form_data['opt_in_confirmation'] = false;
 
         return $form_data;
     }
@@ -182,14 +184,17 @@ function emma_ajax_form_submit_callback() {
             $response = $response_object;
 
             // check if the member was added
-            if ( $response_body->status == 'a' ) {
-                $response->status = 'member_added';
-            } else if ( $response_body->status == 'e' ) {
-                $response->status = 'member_not_added';
-            } else {
-                $response->status = 'member_fail';
-            }
-
+            if ( isset($response_body->status) ) {
+	            if ( $response_body->status == 'a' ) {
+	                $response->status = 'member_added';
+	            } else if ( $response_body->status == 'e' ) {
+	                $response->status = 'member_not_added';
+	            } else {
+	                $response->status = 'member_fail';
+	            }
+			} else {
+				$response->status = $response_body->error;
+			}
         }
 
         // check if the response is a wp_error
@@ -250,15 +255,25 @@ function emma_ajax_form_submit_callback() {
 		//enqueue our front-end js
 		wp_enqueue_script('emma js');
 		
-		if ($this->signup_form_id != '') {
-			$signup_form_id = $this->signup_form_id;
+		$form_style_options = get_option('emma_form_custom');
+		$account_settings = $this->account_information_settings;
+		$only_email = false;
+		
+		if ($this->signup_form_id == '') {
+			$signup_form_id = $this->account_information_settings['form_signup_id'];
 		} else {
-			$signup_form_id = $this->form_setup_settings['form_signup_id'];
+			$signup_form_id = $this->signup_form_id;
+		}
+ 				 		
+//		$form_style_options = get_option('emma_form_custom');
+		
+		if ( isset($account_settings['send_confirmation']) ) {
+			$send_confirmation = true;
+		} else {
+			$send_confirmation = false;
 		}
 		
-		$form_style_options = get_option('emma_form_custom');
-		
-		if ($this->signup_form_layout != '') {
+		if (isset($this->signup_form_layout) && $this->signup_form_layout !== '') {
 			$form_layout = $this->signup_form_layout;
 		} else {
 			$form_layout = $form_style_options['form_layout_select'];
@@ -331,7 +346,11 @@ function emma_ajax_form_submit_callback() {
         $emma_form .= '<li class="emma-form-row emma-form-row-last">';
         $emma_form .= '<span class="emma-form-label-required"></span>';
         
-        $emma_form .= '<input type="hidden" name="emma_signup_form_id" value="' . $this->account_information_settings['form_signup_id'] . '" />';
+        if ( $signup_form_id !== '' ) {
+	        $emma_form .= '<input type="hidden" name="emma_signup_form_id" value="' . $signup_form_id . '" />';
+        }
+        $emma_form .= '<input type="hidden" name="emma_send_confirmation" value="' . $send_confirmation . '" />';
+        
         $emma_form .= '<input type="hidden" name="emma_form_unique" value="' . $form_unique . '" />';
         
         $emma_form .= '<input id="emma-form-submit" type="submit" name="emma_form_submit" value="' . $this->form_setup_settings['submit_txt'] . '">';

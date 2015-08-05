@@ -36,23 +36,26 @@ jQuery(document).ready(function($) {
 					'emma_firstname': $('#emma-subscription-form[data-form-unique="' + thisFormUnique + '"] input[name="emma_firstname"]').val(),
 					'emma_lastname': $('#emma-subscription-form[data-form-unique="' + thisFormUnique + '"] input[name="emma_lastname"]').val(),
 					'emma_signup_form_id': $('#emma-subscription-form[data-form-unique="' + thisFormUnique + '"] input[name="emma_signup_form_id"]').val(),
+					'emma_send_confirmation': $('#emma-subscription-form[data-form-unique="' + thisFormUnique + '"] input[name="emma_send_confirmation"]').val(),
 				};
 				
 				jQuery.post(ajax_object.ajax_url, data, function(response) {
 					var errorClass = '';
 					var hasError = false;
+
 					response = $.parseJSON(response);
 					
 					// Check for errors
-					if (response.code > 800) {
+					if ( response.code > 800) {
 						errorClass = 'emma-alert';
 						hasError = true;
+						response.tracking_pixel = '<p style="display:none !important;">Error occured. No tracking pixel placed.</p>';
 					} else {
 						errorClass = '';
 					}
 					
 					// Display the status
-					thisWrap.prepend('<div class="emma-status ' + errorClass + '" style="display:none;">' + response.status_txt + '</div>');
+					thisWrap.prepend('<div class="emma-status ' + errorClass + '" style="display:none;">' + response.status_txt + '</div>' + response.tracking_pixel);
 					
 					// Show/Hide stuff
 					$('.spinner').delay(800).fadeOut(300, function(){

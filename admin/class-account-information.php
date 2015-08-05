@@ -29,11 +29,12 @@ class Account_Information {
 
     public static function get_settings_defaults() {
         $defaults = array(
-            'plugin_version' => '1.0.5',
+            'plugin_version' => '1.2.0',
             'account_id' => '',
             'publicAPIkey' => '',
             'privateAPIkey' => '',
             'form_signup_id' => '',
+            'send_confirmation' => 1,
             'logged_in' => 'false',
             'groups' => array(),
             'group_active' => '',
@@ -50,7 +51,8 @@ class Account_Information {
         add_settings_field( 'publicAPIkey', 'Public API Key', array( &$this, 'field_public_api_key' ), self::$key, 'section_login' );
         add_settings_field( 'privateAPIkey', 'Private API Key', array( &$this, 'field_private_api_key' ), self::$key, 'section_login' );
         add_settings_field( 'account_id',     'Account ID', array( &$this, 'field_account_id' ),     self::$key, 'section_login' );
-        add_settings_field( 'form_signup_id', 'Signup ID',  array( &$this, 'field_form_signup_id' ), self::$key, 'section_login' );
+        add_settings_field( 'form_signup_id', 'Signup ID (optional)',  array( &$this, 'field_form_signup_id' ), self::$key, 'section_login' );
+        add_settings_field( 'send_confirmation', 'Send Confirmation Email', array( &$this, 'field_send_confirmation' ), self::$key, 'section_login' );
 
         add_settings_section( 'section_groups', 'Add New Members to Group', array( &$this, 'section_groups_desc' ), self::$key );
 
@@ -63,7 +65,7 @@ class Account_Information {
     }
     function section_login_desc() { 
 	    if (self::$settings['account_id'] == '' || self::$settings['publicAPIkey'] == '' || self::$settings['privateAPIkey'] == '' ) {
-			echo "<hr><h4>Don't have an Emma account yet? Try it free for 30 days by signing up <a href='http://myemma.com/partners/get-started?utm_source=Wordpress&utm_medium=integrationpartner&utm_campaign=Wordpress-integrationpartner-partner-trial' title='Email Marketing Services - Email Marketing Software - Email Marketing | Emma, Inc.' target='_blank'>here</a>!</h4><hr>";
+			echo "<hr><h4>Don't have an Emma account yet? Try it free for 30 days by signing up <a href='http://myemma.com/partners/get-started?utm_source=Wor50549&utm_medium=integrationpartner&utm_campaign=partner-trial' title='Email Marketing Services - Email Marketing Software - Email Marketing | Emma, Inc.' target='_blank'>here</a>!</h4><hr>";
 		}
 		
 		echo '<p>You must have an Emma Account with a API key. If you&apos;re unsure if your account is on the new API, contact Emma</p>';
@@ -92,7 +94,6 @@ class Account_Information {
            value="<?php echo esc_attr( self::$settings['privateAPIkey'] ); ?>"
         />
     <?php }
-	
 	function field_form_signup_id() { ?>
         <input id="emma_form_signup_id"
            type="text"
@@ -101,6 +102,15 @@ class Account_Information {
            value="<?php echo esc_attr( self::$settings['form_signup_id'] ); ?>"
         />
     <?php }
+	function field_send_confirmation() { ?>
+		<input id="emma_send_confirmation_email"
+		   type="checkbox"
+		   name="<?php echo self::$key; ?>[send_confirmation]"
+		   value="1"
+		   <?php checked( esc_attr( self::$settings['send_confirmation'] ) ); ?>
+		/> Yes
+	<?php }
+		
 	function emma_add_group_callback() {
 		$groups[] = array('group_name' => $_POST['groupName']);
         
@@ -109,7 +119,7 @@ class Account_Information {
         );
 	    
 	    // instantiate a new Emma API class, pass login / auth data to it
-        $emma_api = new Emma_API( self::$settings['account_id'], self::$settings['publicAPIkey'], self::$settings['privateAPIkey'], self::$settings['form_signup_id']);
+        $emma_api = new Emma_API( self::$settings['account_id'], self::$settings['publicAPIkey'], self::$settings['privateAPIkey'] );
         
         $response = $emma_api->groupsAdd($group_data);
         $response_obj = $response[0];
@@ -174,7 +184,7 @@ class Account_Information {
     }
 
     function sanitize_account_information_settings( $input ) {
-
+		
         // get the current options
         // $valid_input = self::$settings;
         $valid_input = array();
@@ -207,17 +217,6 @@ class Account_Information {
                 );
             };
             
-            // form sign up ID :: check if it's a number
-            $valid_input['form_signup_id'] = ( is_numeric($input['form_signup_id']) ? $input['form_signup_id'] : $valid_input['form_signup_id'] );
-            if ( $valid_input['form_signup_id'] != $input['form_signup_id'] ) {
-                add_settings_error(
-                    'form_signup_id',
-                    'emma_error',
-                    'The Signup ID can only contain numbers, no letters or alpha-numeric characters',
-                    'error'
-                );
-            };
-
             // public API key
             if ( ( strlen($input['publicAPIkey']) == 20 ) && ( ctype_alnum($input['publicAPIkey']) ) ) {
                 $valid_input['publicAPIkey'] = $input['publicAPIkey'];
@@ -243,17 +242,31 @@ class Account_Information {
                     'error'
                 );
             }
+            
+            // form sign up ID :: check if it's a number		
+            $valid_input['form_signup_id'] = ( is_numeric($input['form_signup_id']) ? $input['form_signup_id'] : $valid_input['form_signup_id'] );		
+            if ( $valid_input['form_signup_id'] != $input['form_signup_id'] ) {		
+                add_settings_error(		
+                    'form_signup_id',		
+                    'emma_error',		
+                    'The Signup ID can only contain numbers, no letters or alpha-numeric characters',		
+                    'error'		
+                );		
+            };
+            
+            // Send Confirmation Email
+            $valid_input['send_confirmation'] = $input['send_confirmation'];
 
             // get group data
 
             // instantiate a new Emma API class, pass login / auth data to it
-            $emma_api = new Emma_API( $valid_input['account_id'], $valid_input['publicAPIkey'], $valid_input['privateAPIkey'], $valid_input['form_signup_id']);
+            $emma_api = new Emma_API( $valid_input['account_id'], $valid_input['publicAPIkey'], $valid_input['privateAPIkey'] );
 
             // get the groups for this account
             $groups = $emma_api->list_groups();
 
             // check if groups returned an error, or an answer
-            if ( is_array($groups) && !empty($groups) &&  $input['form_signup_id'] != null) {
+            if ( is_array($groups) && !empty($groups) ) {
 
                 // if it returns an array, it's got groups back from hooking up w/ emma
                 $valid_input['logged_in'] = 'true';
@@ -274,10 +287,6 @@ class Account_Information {
                 $valid_input['group_active'] = $input['group_active'];
                 
                 $error_out = $groups;
-                
-                if ($input['form_signup_id'] == null || $input['form_signup_id'] == '') {
-	                $error_out = 'You must enter a Signup ID to display your form.';
-                }
 
                 // the method returns a string / error message otherwise
                 add_settings_error(

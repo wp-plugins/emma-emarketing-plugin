@@ -4,10 +4,10 @@
  * Plugin Name: Emma For WordPress
  * Plugin URI: http://ahsodeisgns.com/wordpress-plugins/emma-emarketing
  * Description: The Emma WordPress plugin allows you to quickly and easily add a signup form for your Emma list as a widget or a shortcode.
- * Version: 1.1.2
+ * Version: 1.2.0
  * Author: Ah So
  * Author URI: http://ahsodesigns.com
- * Contributors: ahsodesigns, brettshumaker
+ * Contributors: ahsodesigns, brettshumaker, thackston
  * License: GPLv2
  *
  */
@@ -46,6 +46,7 @@ register_deactivation_hook( __FILE__, array( 'Start','plugin_deactivation' ) );
 include_once( EMMA_EMARKETING_PATH . '/class-emma-emarketing.php' );
 
 include_once('admin/class-account-information.php');
+include_once('admin/class-advanced-settings.php');
 include_once('admin/class-form-setup.php');
 include_once('admin/class-form-custom.php');
 
@@ -98,14 +99,16 @@ class Start {
 
         // load default options into database on activation
         // add_option( $option, $value, $depreciated, $autoload );
-        add_option( Account_Information::$key, Account_Information::get_settings_defaults(), '', 'yes' );
-        add_option( Form_Setup::$key, Form_Setup::get_settings_defaults(), '', 'yes' );
-        add_option( Form_Custom::$key, Form_Custom::get_settings_defaults(), '', 'yes' );
+		add_option( Account_Information::$key, Account_Information::get_settings_defaults(), '', 'yes' );
+		add_option( Advanced_Settings::$key, Advanced_Settings::get_settings_defaults(), '', 'yes' );
+		add_option( Form_Setup::$key, Form_Setup::get_settings_defaults(), '', 'yes' );
+		add_option( Form_Custom::$key, Form_Custom::get_settings_defaults(), '', 'yes' );
 
     }
 
     function plugin_deactivation() {
 		delete_option('emma_account_information');
+		delete_option('emma_advanced_settings');
 		delete_option('emma_form_custom');
 		delete_option('emma_form_setup');
         // buh-bye!
@@ -129,19 +132,23 @@ function emma_ajax_form_submit_callback() {
 	$emma_email = $_POST['emma_email'];
 	$emma_firstname = $_POST['emma_firstname'];
 	$emma_lastname = $_POST['emma_lastname'];
-	$emma_signup_form_id = $_POST['emma_signup_form_id'];
+	$emma_signup_form = $_POST['emma_signup_form_id'];
 	
 	$emma_form = new Emma_Form();
 	$emma_form->generate_form($_POST);
 	
 	$status_text = $emma_form->status_txt;
 	$response = $emma_form->emma_response;
+	
+	$advanced_settings = get_option('emma_advanced_settings');
+    $success_pixel = $advanced_settings['successTrackingPixel'];
 
 	$response_array = array(
 		'status_txt' => $status_text,
 		'code' => $response,
 		'raw_data' => $emma_form->raw_data,
 		'raw_response' => $emma_form->raw_response,
+		'tracking_pixel' => '' . apply_filters('emma_tracking_pixel', $success_pixel),
 	);
 	echo json_encode($response_array);
 	

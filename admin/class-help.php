@@ -22,11 +22,11 @@ class Help {
 		<p>Log into your <a href="http://myemma.com/login/" title="Email Marketing Services - Email Marketing Software - Email Marketing | Emma, Inc." target="_blank">Emma account</a> and click on settings button in the upper right hand of your Emma dashboard. Then click "Settings & billing". This will take you to your "Manage your account settings" page. In the Account settings section, the fifth tab is API key. Click on Generate new key to create your API key.</p>
 		<p>Once you create the key, you will need to copy your <strong>Account ID</strong>, <strong>Public API Key</strong>, and <strong>Private API</strong> into the corresponding fields in the plugin.</p>
 		<p>The plugin will now be able to connect your WordPress site to your Emma account.</p>
+		<p><strong>Signup ID (optional) -</strong> Add this ID to target messages based on the signup form members used to join your audience. Click <a href="https://support.e2ma.net/Resource_Center/Account_how-to/customizing-your-signup-form#publish" target="_blank">here</a> for more information.</p>
 		<p><strong>Add New Members to Group (optional) –</strong> assign all submissions to a specific group within your Emma account.</p>
 		<br />
 		
 		<h3><strong>FORM SETUP TAB</strong></h3>
-		<p><strong>Signup ID -</strong> Add this ID to target messages based on the signup form members used to join your audience. Click <a href="https://support.e2ma.net/Resource_Center/Account_how-to/customizing-your-signup-form#publish" target="_blank">here</a> for more information.</p>
 		<p><strong>Form Fields -</strong> select which fields you would like to display.</p>
 		<p><strong>Set Form Width -</strong> set the width of your form.</p>
 		<p><strong>Form Placeholders -</strong> customize the placeholder messages within each field.</p>

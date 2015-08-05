@@ -5,7 +5,7 @@ Author URI: http://ahsodesigns.com
 Plugin URI: http://www.ahsodesigns.com/products/emma-emarketing-plugin/
 Requires at least: 3.0
 Tested up to: 4.2.2
-Stable tag: 1.1.2
+Stable tag: 1.2.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,64 +30,27 @@ After the plugin is installed, the setup page will guide you through entering yo
 
 = Usage Documentation =
 
-**ACCOUNT INFORMATION TAB**
+The Emma for WordPress plugin allows you to quickly and easily add a signup form for your Emma audience as a widget or a shortcode on your WordPress 3.0 or higher site.
 
-**Account Login Information:**
+After the plugin is installed, the setup page will guide you through entering your Emma API login information, selecting your group, setting up the fields for your form, customizing the form and adding the widget to your site.
 
-Log into your [Emma account](http://myemma.com/login/) ([http://myemma.com/login/](http://myemma.com/login/)) and click on 'Account & billing' in the upper right hand of your Emma dashboard. This will take you to your “Manage your account settings” page. In the Account settings section, the fourth tab is **API key**. Click on Generate new key to create your API key.
+1. You can generate your API keys in your account by clicking the tools icon at the top-right and selecting Settings & billing. You'll see a tab for API key. Click "Generate key" to receive a public API key, private API key and account ID. If you have an agency account, go to Menu, choose Accounts, click the downward-pointing arrow to the right of the sub-account whose keys you want and select to jump into that account's settings. Scroll down to the API key section.
 
-Once you create the key, you will need to copy your **Account ID**, **Public API Key**, and **Private API** into the corresponding fields in the plugin.
+2. Go to your WordPress account, select Plugins from the lefthand column and click Settings below Emma for WordPress. Copy your account ID, public API key and private API key into the corresponding fields on the plugin's Account Information tab. This allows it to connect your WordPress site to your Emma account. You can select here whether to send a confirmation email. An optional field lets you assign all subscribers to a specific group in your Emma account.
 
-The plugin will now be able to connect your WordPress site to your Emma account. 
+3. Go to the Form Setup tab. Here, you'll choose which fields to display, set your form's width, customize the placeholder messages within each field, customize the messages that displays under the form after it has been submitted and select whether or not to send a confirmation email, then specify the subject and message of the confirmation email. Click Save.
 
-**Add New Members to Group (optional) -** assign all submissions to a specific group within your Emma account.
+4. Go to the Form Customization tab. This is where you will select how you would like the form to be displayed on your site (vertical or horizontal), customize the styles of your form fields (including border width, border color, border type, text color and background color), customize the styles of your form’s submit button (including width, text color, background color, border width, border color and border type) and customize the styles of your form's submit button when users hover on it. Click Save.
 
-&nbsp;
-
-**FORM SETUP TAB**
-
-**Signup ID -** Add this ID to target messages based on the signup form members used to join your audience. Click [here](https://support.e2ma.net/Resource_Center/Account_how-to/customizing-your-signup-form#publish) for more information.
-
-**Form Fields -** select which fields you would like to display.
-
-**Set Form Width -** set the width of your form.
-
-**Form Placeholders -** customize the placeholder messages within each field.
-
-**Confirmation Messages –** customize the messages that displays under the form after it has been submitted.
-
-**Confirmation Email –** select whether or not to send a confirmation email, then specify the subject and message of the confirmation email.
-
-&nbsp;
-
-**FORM CUSTOMIZATION TAB**
-
-**Form Layout –** select how you would like the form to be displayed on your site.
-
-**Form Fields Customization –** customize the styles of your form fields including border width, border color, border type, text color and background color.
-
-**Submit Button –** customize the styles of your form’s submit button including width, text color, background color, border width, border color and border type.
-
-**Submit Button Hover State Customization –** customize the styles of your form’s submit button when users hover on it.
-
-&nbsp;
-
-**DISPLAYING THE FORM ON YOUR SITE**
-
-To insert the form as a **widget** on your sidebar, go to Appearance -> Widgets and then move the “Emma for Wordpress Subscription Form” to the widget area where you want the form to appear.
-
-To insert the form as a **shortcode** within your site, insert [emma_form] within your text editor where you want the form to appear.
-
-&nbsp;
-
-For questions or comments visit our [plugin homepage](http://ahsodesigns.com/nashville-wordpress-what-we-do/plugin-development/emma-wordpress-plugin/).
+5. Go to the Advanced Settings tab. This is where you'll add tracking code to each signup form submission. Paste your code into the box, and click Save.
 
 == Screenshots ==
 
 1. This is the Account Information tab of the plugin settings, here you enter your account keys and account number, then select the group you wish to add members to.
 2. This is the Form Setup tab of the plugin settings, here you configure the form's output on your site, you can also choose to add a stylish emma logo to your form, and share some love.
 3. This is the Form Customization tab of the plugin settings, here you can style your form, choose colors, border types, and so on.
-4. This is the Help tab of the plugin settings, it contains instructions on how to get up and running with your new Emma for WordPress Plugin.
+4. This is the Advanced Settings tab of the plugin settings, here you can add a tracking pixel to be placed after a successful submission.
+5. This is the Help tab of the plugin settings, it contains instructions on how to get up and running with your new Emma for WordPress Plugin.
 
 == Frequently Asked Questions ==
 
@@ -105,12 +68,34 @@ For questions or comments visit our [plugin homepage](http://ahsodesigns.com/nas
    
    Once you've configured the plugin, and entered your account ID, Private and Public API keys, navigate from the Dashboard to Settings -> Emma for Wordpress. Under the “Account information” tab there is a dropdown menu under “Add New Members to Group.” From here, you can select the group to which new members should be added.
 
+3. Can I set up an automated workflow using my WordPress form?
+   
+   You sure can. You can have an email send when:
+       
+       1. someone subscribes to a specific group from a specific signup form (both configured on the WordPress side)
+	   
+	   2. someone subscribes to a specific group from any signup form (also both configured on the WordPress side)
+
+	   3. someone subscribes to any group from any signup form
+
+	Scenarios that won't work are when:
+
+	   1. no group is specified in your WordPress plugin (that field isn't required, though we recommend specifying a group so your contacts are added where you can easily send to them)
+	   
+	   2. you don't have any groups in your account (which won't allow you to activate the plugin)
+
 == Upgrade Notice ==
 
-2. This Plugin requires Wordpress version 3.0 and above
-3. This Plugin requires PHP version 5.2.6, as it uses json_encode with integers in the Emma_API class
+1. This Plugin requires Wordpress version 3.0 and above
+2. This Plugin requires PHP version 5.2.6, as it uses json_encode with integers in the Emma_API class
 
 == Changelog ==
+
+= 1.2.0 =
+* Added 'Advanced Settings' tab that allows a tracking pixel to be loaded upon successful submission.
+* Made the Signup ID an optional parameter.
+* Cleaned up some PHP Notices.
+* Updates to documentation.
 
 = 1.1.2 =
 * Fixed bug that was causing automation to fail in some instances.

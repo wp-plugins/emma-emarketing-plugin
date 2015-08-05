@@ -202,8 +202,7 @@ class Form_Setup {
         if ( $submit ) {
 
             // text inputs
-            //$valid_input['form_signup_id']						  = wp_kses( $input['form_signup_id'], '' );
-            $valid_input['form_signup_id'] = (is_numeric($input['form_signup_id']) ? $input['form_signup_id'] : $valid_input['form_signup_id']);
+            $valid_input['form_signup_id'] 						  = (is_numeric($input['form_signup_id']) ? $input['form_signup_id'] : $valid_input['form_signup_id']);
             $valid_input['include_firstname_lastname']  		  = $input['include_firstname_lastname'];
             $valid_input['form_size']                   		  = $input['form_size'];
             $valid_input['email_placeholder']           		  = wp_kses( $input['email_placeholder'], '' );

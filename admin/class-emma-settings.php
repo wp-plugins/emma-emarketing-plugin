@@ -32,11 +32,13 @@ class Emma_Settings {
         $this->_plugin_settings_tabs[ Account_Information::$key ]   = 'Account Information';
         $this->_plugin_settings_tabs[ Form_Setup::$key ]            = 'Form Setup';
         $this->_plugin_settings_tabs[ Form_Custom::$key ]           = 'Form Customization';
+        $this->_plugin_settings_tabs[ Advanced_Settings::$key ]   	= 'Advanced Settings';
         $this->_plugin_settings_tabs[ Help::$key ]                  = 'Help';
 
         $account_information = new Account_Information();
         $form_setup = new Form_Setup();
         $form_custom = new Form_Custom();
+        $advanced_settings = new Advanced_Settings();
         $help = new Help();
 
     }

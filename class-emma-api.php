@@ -32,7 +32,7 @@ class Emma_API {
 	const REQUEST_URL_BASE = 'https://api.e2ma.net/';
 
 	// THE CONSTRUCTOR
-	public function __construct( $_account_id, $_publicAPIkey, $_privateAPIkey, $_signup_ID ) {
+	public function __construct( $_account_id, $_publicAPIkey, $_privateAPIkey, $_signup_ID = '' ) {
 
 		// on construction, pass in public and private API keys, assign them to class properties, 
 		$this->_account_id = $_account_id;

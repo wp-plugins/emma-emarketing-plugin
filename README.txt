@@ -1,5 +1,5 @@
 === Emma for WordPress ===
-Contributors: ahsodesigns, brettshumaker
+Contributors: ahsodesigns, brettshumaker, thackston
 Tags: Plugin, Emma, MyEmma, emarketing, form, custom, api, widget, shortcode, subscription
 Author URI: http://ahsodesigns.com
 Plugin URI: http://www.ahsodesigns.com/products/emma-emarketing-plugin/

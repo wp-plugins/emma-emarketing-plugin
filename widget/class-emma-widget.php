@@ -29,7 +29,7 @@ class Emma_Widget extends WP_Widget {
 			'description' => 'Displays an email subscription form for Emma Emarketing'
 		);
 		
-		$this->WP_Widget( 'emma-widget', 'Emma For WordPress', $widget_ops );
+		parent::__construct( 'emma-widget', 'Emma For WordPress', $widget_ops );
 		
 		// check to see if widget is being used
 		if ( is_active_widget(false, false, $this->id_base) ) {

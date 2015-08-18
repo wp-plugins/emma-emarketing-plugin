@@ -4,8 +4,8 @@ Tags: Plugin, Emma, MyEmma, emarketing, form, custom, api, widget, shortcode, su
 Author URI: http://ahsodesigns.com
 Plugin URI: http://www.ahsodesigns.com/products/emma-emarketing-plugin/
 Requires at least: 3.0
-Tested up to: 4.2.2
-Stable tag: 1.2.1
+Tested up to: 4.3.0
+Stable tag: 1.2.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -90,6 +90,9 @@ After the plugin is installed, the setup page will guide you through entering yo
 2. This Plugin requires PHP version 5.2.6, as it uses json_encode with integers in the Emma_API class
 
 == Changelog ==
+
+= 1.2.2 =
+* Updated for WordPress 4.3 compatibility (switched to PHP5 style constructor for the widget)
 
 = 1.2.1 =
 * Added missing file to repository.

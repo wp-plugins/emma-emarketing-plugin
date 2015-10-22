@@ -22,4 +22,9 @@ jQuery(document).ready(function($) {
 			}
 		});
 	});
+	
+	$('.emma-custom-fields').hover(function(){
+		$('.emma-custom-content-cta').show().addClass('flipInX animated');
+	});
+	
 });

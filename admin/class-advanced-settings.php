@@ -39,13 +39,20 @@ class Advanced_Settings {
         add_settings_section( 'section_adv_settings', 'Emma Advanced Settings', array( &$this, 'section_adv_desc' ), self::$key );
 
         add_settings_field( 'successTrackingPixel', 'Tracking Pixel', array( &$this, 'field_success_tracking_pixel' ), self::$key, 'section_adv_settings' );
+        
+        add_settings_section( 'section_adv_settings_custom_content_build', 'Build Custom Content For Emma Mailing', array( &$this, 'section_adv_custom_content_desc' ), self::$key );
     }
     
     function section_adv_desc() { 
 		echo '<p><strong>For advanced users only!</strong><br />Any code inserted in this area will be applied upon a successful form submission. This area is commonly can used for tracking pixels for Facebook or tracking for Google Analytics for pay per click campaigns.</p>';
 	}
-    function field_success_tracking_pixel() { ?>
-        <textarea id="emma_success_tracking_pixel" style="width:400px;max-width: 100%;" rows="10" name="<?php echo self::$key; ?>[successTrackingPixel]"><?php echo esc_attr( self::$settings['successTrackingPixel'] ); ?></textarea>
+    function field_success_tracking_pixel() { 
+	    $successTrackingPixel = '';
+	    if ( isset(self::$settings['successTrackingPixel']) ) {
+		    $successTrackingPixel = esc_attr( self::$settings['successTrackingPixel'] );
+	    }
+    ?>
+        <textarea id="emma_success_tracking_pixel" style="width:400px;max-width: 100%;" rows="10" name="<?php echo self::$key; ?>[successTrackingPixel]"><?php echo $successTrackingPixel; ?></textarea>
     <?php }
 
     function sanitize_advanced_settings( $input ) {
@@ -84,5 +91,15 @@ class Advanced_Settings {
 
     } // end sanitize_advanced_settings
 
-
+	function section_adv_custom_content_desc() {
+		echo '<div class="emma-custom-content-outer">';
+			echo '<div class="emma-custom-fields">';
+				echo '<p>You must first create and schedule your mailing within Emma using the <pre>[% member:custom-html-content %]</pre> Then select your mailing below, and click &ldquo;Build Content&rdquo;</p>';
+				echo '<select id="select-mailing" disabled><option value="000"> - select a mailing - </option></select>';
+			echo '</div>';
+			echo '<div class="emma-custom-content-cta">';
+				echo '<p>This feature requires customization.</p><p><a class="button button-primary" href="//ahsodev.com/advanced-emma-plugin/" title="Ah So Designs custom content build for Emma campaigns" target="_blank">Learn more!</a></p>';
+			echo '</div>';
+		echo '</div>';
+	}
 }

@@ -2,10 +2,10 @@
 Contributors: ahsodesigns, brettshumaker, thackston
 Tags: Plugin, Emma, MyEmma, emarketing, form, custom, api, widget, shortcode, subscription
 Author URI: http://ahsodesigns.com
-Plugin URI: http://www.ahsodesigns.com/products/emma-emarketing-plugin/
+Plugin URI: http://ahsodesigns.com/what-we-do/plugin-development/
 Requires at least: 3.0
-Tested up to: 4.3.0
-Stable tag: 1.2.2
+Tested up to: 4.3.1
+Stable tag: 1.2.4.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,6 +17,7 @@ After the plugin is installed, the setup page will guide you through entering yo
 
 [Sign up today!](http://myemma.com/partners/get-started?utm_source=Wordpress&utm_medium=integrationpartner&utm_campaign=Wordpress-integrationpartner-partner-trial)
 
+Want to serve your Emma subscribers the latest posts or customized content from your WordPress site? Think of it like RSS to email, but better.  To enable this functionality, customization to your [Emma and WordPress](//ahsodev.com/advanced-emma-plugin/) account is needed. [Learn more](//ahsodev.com/advanced-emma-plugin/).
 
 == Installation ==
 
@@ -90,6 +91,16 @@ After the plugin is installed, the setup page will guide you through entering yo
 2. This Plugin requires PHP version 5.2.6, as it uses json_encode with integers in the Emma_API class
 
 == Changelog ==
+
+= 1.2.4.1 =
+* Fixed a typo!
+
+= 1.2.4 =
+* Fixed bug where admin pointer would not dismiss
+
+= 1.2.3 =
+* Added information on how to serve you’re Emma subscribers the latest posts or customized content from WordPress.
+* Fixed PHP "Undefined Index" notice
 
 = 1.2.2 =
 * Updated for WordPress 4.3 compatibility (switched to PHP5 style constructor for the widget)

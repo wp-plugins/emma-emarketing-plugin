@@ -2,9 +2,9 @@
 
 /**
  * Plugin Name: Emma For WordPress
- * Plugin URI: http://ahsodeisgns.com/wordpress-plugins/emma-emarketing
- * Description: The Emma WordPress plugin allows you to quickly and easily add a signup form for your Emma list as a widget or a shortcode.
- * Version: 1.2.2
+ * Plugin URI: http://ahsodesigns.com/what-we-do/plugin-development/
+ * Description: The Emma WordPress plugin allows you to quickly and easily add a signup form for your Emma list as a widget or a shortcode.  Interested in RSS to Email, but better functionality? Visit <a class="button button-primary" href="//ahsodev.com/advanced-emma-plugin/" title="Ah So Designs custom content build for Emma campaigns" target="_blank">Ah So</a> for more information.
+ * Version: 1.2.4.1
  * Author: Ah So
  * Author URI: http://ahsodesigns.com
  * Contributors: ahsodesigns, brettshumaker, thackston
@@ -153,4 +153,78 @@ function emma_ajax_form_submit_callback() {
 	echo json_encode($response_array);
 	
 	wp_die();
+}
+
+add_action( 'admin_notices', 'emma_admin_notices' );
+function emma_admin_notices() {
+	if ( isset($_GET['page']) && $_GET['page'] == 'emma_plugin_options' ) {
+		echo '<div class="update-nag notice is-dismissible"><p>Want to serve your Emma subscribers the latest posts or customized content from your WordPress site?  Think of it like RSS to email, but better.  To enable this functionality, customization to your Emma and WordPress account is needed, but Ah So can help.</p><p><a class="button button-primary" href="//ahsodev.com/advanced-emma-plugin/" title="Ah So Designs custom content build for Emma campaigns" target="_blank">Learn more!</a></p></div>';
+	}
+}
+
+add_action( 'admin_enqueue_scripts', 'emma_pointer_load', 1000 );
+function emma_pointer_load( $hook_suffix ) {
+ 
+    // Don't run on WP < 3.3
+    if ( get_bloginfo( 'version' ) < '3.3' )
+        return;
+ 
+    $screen = get_current_screen();
+    $screen_id = $screen->id;
+ 
+    // Get pointers for this screen
+    $pointers = apply_filters( 'emma_admin_pointers', array() );
+ 
+    if ( ! $pointers || ! is_array( $pointers ) )
+        return;
+ 
+    // Get dismissed pointers
+    $dismissed = explode( ',', (string) get_user_meta( get_current_user_id(), 'dismissed_wp_pointers', true ) );
+    $valid_pointers =array();
+ 
+    // Check pointers and remove dismissed ones.
+    foreach ( $pointers as $pointer_id => $pointer ) {
+ 
+        // Sanity check
+        if ( in_array( $pointer_id, $dismissed ) || empty( $pointer )  || empty( $pointer_id ) || empty( $pointer['target'] ) || empty( $pointer['options'] ) )
+            continue;
+ 
+        $pointer['pointer_id'] = $pointer_id;
+ 
+        // Add the pointer to $valid_pointers array
+        $valid_pointers['pointers'][] =  $pointer;
+    }
+ 
+    // No valid pointers? Stop here.
+    if ( empty( $valid_pointers ) )
+        return;
+ 
+    // Add pointers style to queue.
+    wp_enqueue_style( 'wp-pointer' );
+ 
+    // Add pointers script to queue. Add custom script.
+    wp_enqueue_script( 'emma-pointer', EMMA_EMARKETING_URL . '/assets/js/emma-pointer.js', array( 'wp-pointer' ) );
+	
+    // Add pointer options to script.
+    wp_localize_script( 'emma-pointer', 'emmaPointer', $valid_pointers );
+}
+
+add_filter( 'emma_admin_pointers', 'emma_register_pointer' );
+function emma_register_pointer( $p ) {
+    $p['bsefw1'] = array(
+        'target' => '#menu-settings',
+        'options' => array(
+			'content' => '<h3>RSS To Email, Only Better</h3><p>Want to serve you’re Emma subscribers the latest posts or customized content from your WordPress site?  Think of it like RSS to email, but better.  To enable this functionality, customization to your Emma and WordPress account is needed, but Ah So can help.</p><p><a href="' . get_admin_url() . 'options-general.php?page=emma_plugin_options&tab=emma_advanced_settings" title="Ah So Designs custom content build for Emma campaigns">Learn more!</a></p>',
+            'position' => array( 'edge' => 'left', 'align' => 'middle' )
+        )
+    );
+    return $p;
+}
+
+add_action('wp_ajax-dismiss-wp-pointer', 'emma_dismiss_pointer', 1);
+function emma_dismiss_pointer() {
+	$user_dismissed_pointers = get_user_meta( get_current_user_id(), 'dismissed_wp_pointers', true );
+	$user_dismissed_pointers .= ', ' . $_POST['pointer'];
+	
+	update_user_meta( get_current_user_id(), 'dismissed_wp_pointers', $user_dismissed_pointers );
 }
